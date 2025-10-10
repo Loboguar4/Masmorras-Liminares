@@ -533,8 +533,8 @@ class OlhoDeVecna(InimigoEspecial):
             nome="Olho de Vecna",
             hp=250,
             ac=45,
-            ataque_bonus=33,
-            dano_lados=35,
+            ataque_bonus=23,
+            dano_lados=25,
             pos=pos,
             tipo="lendário",
             magia=True
@@ -758,14 +758,14 @@ class Mapa:
             if self.matriz[y][x] == '.':
                 if dificuldade >= 23 and random.random() < 0.5:
                     self.inimigos.append(InimigoEspecial(
-                        "Dracolich", 32 + dificuldade * 3, 17 + dificuldade,
-                        10 + dificuldade // 2, 12, (x, y), tipo='lendário', magia=True
+                        "Dracolich", 32 + dificuldade * 3, 19 + dificuldade,
+                        12 + dificuldade // 2, 14, (x, y), tipo='lendário', magia=True
                     ))
                 else:
                     if dificuldade >= 13 and random.random() < 0.5:
                         self.inimigos.append(InimigoEspecial(
                             "Campeão da Morte", 27 + dificuldade * 3, 17 + dificuldade,
-                            8 + dificuldade // 2, 10, (x, y), tipo="elite", magia=True
+                            9 + dificuldade // 2, 12, (x, y), tipo="elite", magia=True
                         ))
                 return
 
@@ -804,23 +804,23 @@ class Mapa:
             # Definição de inimigos comuns com pesos
             inimigos_comuns = [
                 ("Goblin", 7 + rolar_dado(5) + dificuldade,
-                10 + dificuldade // 3, 3 + dificuldade // 2,
+                14 + dificuldade // 3, 3 + dificuldade // 2,
                 5, 50),  # 50% de chance
                 ("Esqueleto Armadurado", 12 + rolar_dado(7) + dificuldade,
-                12 + dificuldade, 6 + dificuldade // 2,
+                17 + dificuldade, 6 + dificuldade // 2,
                 3, 35),  # 35% de chance
                 ("Arqueiro Sombrio", 9 + rolar_dado(5) + dificuldade,
-                11 + dificuldade // 2, 5 + dificuldade,
+                15 + dificuldade // 2, 5 + dificuldade,
                 6, 30)   # 30% de chance
             ]
 
             # Definição de inimigos raros com pesos
             inimigos_raros = [
                 ("Orc Guerreiro", 19 + rolar_dado(7) + dificuldade,
-                12 + dificuldade // 3, 6 + dificuldade // 2,
+                19 + dificuldade // 3, 6 + dificuldade // 2,
                 8, 15),  # 15% de chance
                 ("Gárgula de Pedra", 22 + rolar_dado(7) + dificuldade * 2,
-                14 + dificuldade, 8 + dificuldade // 2,
+                22 + dificuldade, 8 + dificuldade // 2,
                 4, 10)   # 10% de chance
             ]
 
