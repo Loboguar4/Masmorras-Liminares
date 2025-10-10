@@ -103,8 +103,6 @@ da masmorra avançada. Indicando somente a profundidade da run e a dificuldade d
 
     #### MAPA E LEGENDA ####
 
-Primeiramente recomenda-se o uso de uma fonte que permita melhor visibilidade das ASCII-arts e símbolos, ex: SimSun-ExtG =< 20
-
 O mapa da interface segue uma padrão de grade 4x4 como no exemplo a seguir:
 
 Exemplo 1:
@@ -171,5 +169,6 @@ Primeiramente gostaria de agradecer a todos que jogaram e que ainda irão jogar 
 E principalmente, dedico essa minha primeira publicação de projeto à minha querida gata, Meme.
 
 Sem você a solidão seria pior.
+
 
 
