@@ -145,8 +145,7 @@ a cada nível/andar, a dificuldade só aumentará progressivamente.
 Como em um rogue-like clássico, a movimentação se baseia em cima, baixo, esquerda, direita (W,S,A,D).
 Cada movimentação ou ação do jogador equivale a um turno global.
 
-Para usar ou equipar itens basta pressionar a tecla [E] acessando o inventário e selecionar
- o item que deseja utilizar numericamente. Se o jogador estiver em combate, o inventário é acessado 
+Para usar ou equipar itens basta pressionar a tecla [E] (e ENTER para confirmar) acessando o inventário e selecionar o item que deseja utilizar numericamente. Se o jogador estiver em combate, o inventário é acessado 
  pela opção de ação número [3]. Lembre-se que cada ação do jogador, também valida a ação do turno
  inimigo globalmente.
 
@@ -169,6 +168,7 @@ Primeiramente gostaria de agradecer a todos que jogaram e que ainda irão jogar 
 E principalmente, dedico essa minha primeira publicação de projeto à minha querida gata, Meme.
 
 Sem você a solidão seria pior.
+
 
 
 
