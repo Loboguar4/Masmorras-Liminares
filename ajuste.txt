@@ -1,0 +1,38 @@
+	#### BUG REPORT E MELHORIAS PARA VERSÕES FUTURAS ####
+
+
+- Botas do Silêncio: aumenta em 15% as chances de fuga
+
+- Implementar baús entre os itens. Funcionarão como as portas, podendo estar trancados ou abertos, com algum item ou vazios
+
+- Lamina Sombria: 9% do dano causado como sangramento e roubo de vida
+
+- Alterar nome do item Elmo da Fúria para Elmo espinhoso da Fúria
+
+- Adicionar uma função que faça um bloco de parede desaparecer em uma chance de 1/5 ao esbarrar na mesma parede por três vezes, dando a entender que o jogador descobriu uma passagem secreta
+
+- Habilitar o uso de habilidade no segundo botão do sistema de combate.
+	habilidade - guerreiro : Investida Feroz
+	habilidade - ladino : Contra-ataque
+
+- Verificar nomes de inimigos e itens protegidos por direitos em D&D
+
+- Tornar chefe final escalável
+
+- Ajustar para limpar a tela ao escolher uma ação
+
+- Verificar amuleto de resistência
+
+- Adicionar status de CA e efeitos de itens durante combate
+
+- Verificar acúmulo de efeitos de itens como força, berserker ou múltiplas poções. (orbe + berserker acumula)
+
+- Verificar spawn inimigo: printa imagem do inimigo e aviso de início de combate, mas falsamente. isso ocorre geralmente após derrotar um inimigo
+
+- Adicionar novos itens: (Capuz do Arcanista Maior, Gadanha Antiga do Ceifador) 
+
+- Adicionar storytelling:
+	"Essa masmorra é diferente de qualquer coisa que um mortal já conheceu, e não aparenta pertencer ao mundo dos vivos. As paredes parecem se mover sozinhas, selando passagens já utilizadas, e abrindo novas." "É como areia movediça, e não existe caminho de volta." 
+
+- Programar um NPC que permita troca de itens. Ele oferece 10 itens aleatórios pra trocar por um item do jogador	
+	"alguma vez após tantas batalhas, alucinou ainda estar lutando?"

@@ -1,0 +1,175 @@
+    MASMORRAS LIMINARES ver. 0.9.0-beta ~~ Desenvolvido pelo Bandeirinha
+
+ ......:..:.:::.::::.                                                                               
+........:::.::..:::                                                                                 
+.........:......:..                                                                                 
+.......:..........                               ......                                             
+......::... .::...                            .............                                         
+.......:....::...                           ................                                        
+......:..::::....                          ...:..::.:........                                       
+.....::^::.::...                           ..::..::::....:....                                      
+.......:::..:...                          ..::::.:.::.....:..:.                                     
+..:...:::::::...                          ...::::::::...:.:.....                                    
+...::.:..:^^:.:..                      ....     .::::...::::..::.                                   
+:::.:...^:^7!:::.                    .....       .....:::::::.:::.                                  
+.::::...:^~!7^...                      ...       .    .::::::::::::.                                
+.:::::..:^^~!~:.::                     ......   ..::.   ::::::::..::..                              
+:.:~......:::^!^:^~.                   . ..::.    :~~:  .:^:::::...::::::..                         
+::::...  ...::^~^^^.               .   ..  ....   .:^:   ..:::::.:::::::::::..                      
+:^^^::^:. .^^.. .:.              .::.  ..      .            .:..:..:::::::::::.                     
+:::::~~~~....  :!.              .::::. ......    .. ... ... ..::........:::..:.                     
+:::^^^::~!.   .7:              .::::...............................::::.......:.                    
+:^^~^:.:^^.:^~~~.             .::::................:...............:::....::...:.                   
+..::^^..::~~~7!^.            .:::.. .....................................:::::::.                   
+....:.:.^:~7!?J7.          ..:... . .............:.........::.::.::::::::::::::.:.                  
+:.::^::~~~^^^!77^         .:.........   ............::...:::::::.....:::::::::::::                  
+:::^^^:!^::^:!~!^        ..........  ...:^::::... ..........::::::::::......::::::.                 
+^^^^::.~^:^~~^:!:       .......     ...::7^~::.....  .......::::::::::::.:....::::.                 
+::^:::::^^:!~:^~      .........     ...^^!^~:........ .........::::::::::....::::::.                
+:^^::^^:^~~!^^!^     .....:.. .     ...:^^~~^.......... .........:::::..::::.....:::                
+.::^^:::^~^^^~7~.    .....:...     .....^:^~~:..........   ..........::....:::::::::.               
+.^^~!:::~^^^^~!~:     ...::...     .....^^^~~:...........     .........::::.:::::::::.              
+.:^^~!^:!!~~~^::.     ...::...     .....^^^~~^...................::::::.:::::::::::::.              
+....:^!7777~~^^!      ...::...     .....^^^~~^.............::::....:::::.::::::::::.:.              
+....:^^!???7!~~!.     ..:::....   ......::..::.::..::.::::::.................:..:::..               
+.....:^^??7!7!!!^     ..:::....   ........:^:...............        .........:....::.               
+::...:^!??!!~~~!~     ..:.:...  . .......::.............            ......:........:.               
+^~^:...^7?~:::~~:     ...:....... ....................     . ...... ......:..:.....:.               
+^~~~~:..^!^..:~^^.    ...:........................      . .......... ......:.:.......               
+:~!!!^:..!~:^~~~7.    ...:............ .......:...   ......:::................:.:....               
+:~!77!:.:^~^^77^:     ...:...........  ...^:.~!.   ...:.::.:.:::............:.:......               
+~^~!7!^^!~^:^7Y~.     ...:.............  :^:~!!.  .:..:..:.::::..... .......::.......               
+~~~!77!~~7!!^~J^.     ...:...........:.  .~~!!!:.........:.:::..............:.......                
+~~~!!~7!~7?!:!Y7:     ..::..........::....~~~!!^...:.....:..::::::......:.:..:::....                
+~~^^^:!7!?77!?JY?...  ..::..........:.....^~~!!~........:::.:::::....::.:.:.::::....                
+~!^:^::~77?777J?J7.......:................:~~!!~...:..:.:::.:::::.:..::.:..::.::...    .            
+:!?~::!7!~7J77??Y7.................::.....:~~!!!:..::::.:::.:::::::..:.....::.::::.             ....
+:^7J7~~!77!7777?JJ?. ..............:.......~~!!!^..:::::.::.:::::::..:.:...:::::::. ....     .......
+~^^!7?~^!J77!7JJ?JJ! .......:..........:...~!!!!^..::::.....:::::::.::.....::::::...................
+^~~^:~7~~77!!!???77:....:..............:.:.^!!7!~..::::.....:::::::.::....::::::::..................
+.:~!~^^^!7???77??!^:....::........:..:::.:.:!!7!~..::::....:::::.::.:::.:.::::::::.    .............
+...:^~~~^~??J7JJ???^.....:..:........:::.:..!!77!..:::::..::::::::::::::::::::::::.      ...........
+::^..:^!!^!?JJYYYY?^........:.........::.:..~!!7!..:::::::::::::::.::::.::::::::::.   ..............
+:~7~...^7!^!??JJ?YY^........:.....:...:..::.^!!?!..:::::::::::::::.::::.::::::::::. ................
+^:^!!...^!~^~7JY77Y7:.......:.....:...:..::..!!?!..:::::::::::::::.:::::::::::::::..................
+?7~~!~..^~^~^^!?!:JJ:........:....:.:::...:..~!?!..:::::::::::::::::::::.::::::::.:.................
+?77777:.:^~^^::!^^J!.............::::::...::..!?^..:::::::::::.::::::::..::::.:::.:.................
+7!~~~~!^.:^:^^^7~?YJ^............::::::..:::. ^!...:::::::::::.::::::::...:::.:::::.................
+^:^~^^~^^!^...:^:!J5Y:...........:::::...:::...::..:::::::::::::::::::::..:::::::::.................
+~~!7!7~^^::^:~7^:~7JJ?.......:...:::::..:::::..::..::::::::::.::::::::::..:::::::::.................
+J?7!!!^:.:^~!??7:^?J!5?.........::::::..:::::..::..::::::::::.:::::::::::::::::::::...............
+
+    Para apoiar este e mais projetos: pixgg.com/bandeirinha
+
+    
+
+    #### NOTA E APRESENTAÇÃO ####
+
+Masmorras Liminares é um Dungeon Crawler RPG inspirado em alguns aspectos de Dungeons and Dragons.
+Inicialmente eu pensava em simplemeste imitar todo o sistema D&D rodando em Powershell e Bash utilizando a linguagem Python,
+ mas ao decorrer do desenvolvimento, a ideia inicial foi se transformando em algo mais original... Quero dizer,
+ acho que não inventei nada aqui, apenas importei aspectos presentes em alguns outros jogos que gosto
+ (Rogue, Fear and Hunger, Dark Souls...), todos eles sendo punitivos e exigindo senso tático 
+e de prioridade no gerenciamento de recursos, além do apelo e estética Dark Fantasy com um pouco de Cosmic Horror.
+
+Ao somar esses aspectos com um sistema de geração de mapas procedural, cada run do jogo torna-se uma luta 
+pela sobrevivência extremamente imprevisível e desafiadora.
+O jogo é na verdade muito curto e simples, se resumindo em uma única aventura solitária de masmorra, 
+até vencer um chefe final, logo não há necessidade de salvar progresso em runs que durarão em média 25 minutos.
+É um sistema que foi desenvolvido pensando principalmente na rejogabilidade, e sinceramente espero
+muito que esse sistema possa ser testado e avaliado por usuários e membros da comunidade Open Source,
+ou qualquer outro entusiasta, seja de RPGs, de computação em geral, o que for.
+
+E sim, sendo essa a primeira versão jogável de Masmorras Liminares, pretendo continuar o desenvolvimento do sistema,
+lançando novas versões futuramente, contendo expansões de conteúdo (mapas, inimigos, NPCs, itens, lores e quests), 
+além de melhorias técnicas e gráficas. 
+
+
+    #### INÍCIO DE JOGO ####
+
+Primeiramente recomenda-se o uso de uma fonte que permita melhor visibilidade das ASCII-arts e símbolos; ex: SimSun-ExtG =< 20
+
+Após iniciar o jogo e escolher uma classe, começamos com o jogador recebendo boas-vindas de uma força sobrenatural à uma masmorra
+ que não parece real, como se estivesse em um sonho, ou será que devo dizer... Um pesadelo? O Olho de Vecna é um artefato terrível
+ e poderosíssimo que se tornou autoconsciente, aprisionando-o em um labirinto ilusional, feito para consumir
+ a sua alma e essência. 
+
+A Única forma de sobreviver é encontrando o Olho pessoalmente e derrotando-o para se libertar dessa 
+maldição labiríntica.
+
+Não existe um sistema de Level Up, os níveis são contados para cada área (mapa gerado) 
+da masmorra avançada. Indicando somente a profundidade da run e a dificuldade do jogo.
+
+
+    #### MAPA E LEGENDA ####
+
+Primeiramente recomenda-se o uso de uma fonte que permita melhor visibilidade das ASCII-arts e símbolos, ex: SimSun-ExtG =< 20
+
+O mapa da interface segue uma padrão de grade 4x4 como no exemplo a seguir:
+
+Exemplo 1:
+🕽️ Você avança na masmorra...
+ ▒  ▒  ▒  ▒
+███ ?  >  ●
+ ▒  ? ███ ▒
+ ▒  ▒  ▒  ▒
+
+ ● : Jogador
+ > : Escadaria abaixo 
+ ███ : Paredes (Podem se mover sozinhas e ocasionalmente bloquear o jogador em um ponto da run, apesar de raro). 
+ ? : Zona escura
+    Dentro de zonas escuras podem ocorrer eventos gerados combinadamente e aleatoriamente,
+    como encontrar inimigos e estruturas ao mesmo tempo (o que pode te salvar com um pouco de sorte). E 
+    também é onde o jogador deve procurar por itens.
+
+Exemplo 2:
+🕽️ Você avança na masmorra...
+███ ▒   ▒   ▒
+ ▒  + !  ▒
+ ▒   > ██████
+ ●  !  ▒  ███
+
+ ! : Inimigo detectado
+ + : Estrutura não identificada
+    O jogador precisará se aproximar para identificar a estrutura
+
+Bordas:
+
+As bordas do mapa não são plenamente bloqueadas, isso porque atravessá-las é uma das maneiras de avançar
+pela dungeon, gerando um novo mapa 4x4 a partir do ponto de passagem.
+
+O jogador precisará entender que nem sempre será viável ou vantajoso explorar uma área, mas por outro lado,
+a cada nível/andar, a dificuldade só aumentará progressivamente. 
+
+
+    #### JOGABILIDADE ####
+
+Como em um rogue-like clássico, a movimentação se baseia em cima, baixo, esquerda, direita (W,S,A,D).
+Cada movimentação ou ação do jogador equivale a um turno global.
+
+Para usar ou equipar itens basta pressionar a tecla [E] acessando o inventário e selecionar
+ o item que deseja utilizar numericamente. Se o jogador estiver em combate, o inventário é acessado 
+ pela opção de ação número [3]. Lembre-se que cada ação do jogador, também valida a ação do turno
+ inimigo globalmente.
+
+Equipamento: 
+
+O equipamento é formado por até 6 itens escolhidos pelo jogador, escalonando o status do personagem.
+
+Apesar do dano base das armas se somarem na build, apenas 1 efeito de arma será ativado por vez, isto é, 
+da última a ser equipada pelo jogador.
+
+
+Talvez este guia já tenha sido claro o suficiente. As masmorras cuidarão do restante.      
+
+
+    
+    #### AGRADECIMENTOS ####
+
+Primeiramente gostaria de agradecer a todos que jogaram e que ainda irão jogar este Dungeon Crawler.
+
+E principalmente, dedico essa minha primeira publicação de projeto à minha querida gata, Meme.
+
+Sem você a solidão seria pior.
+
+
