@@ -1,10 +1,21 @@
-#    MASMORRAS LIMINARES ver. 0.9.0-beta ~~ Desenvolvido pelo Bandeirinha
+"""
+# MASMORRAS LIMINARES - ver. 0.9.1-beta
+# Copyright (C) 2025 Bandeirinha
+# Licensed under the GNU GPL v3.0 or later
+
+NOTAS DE ATUALIZAÇÃO:
+
+- Bug de entrada inválida que permitia regeneração "gratuita" em sistema de combate foi removida.
+
+    Agora o sistema pune entradas inválidas, interpretando como hesitação do jogador.
+
+"""
 
 import random
 import os
 import time
 
-from rotas import warrior, wizard, rogue, rogue2
+from rotas import warrior, spell, wizard, rogue, rogue2
 from enemies import goblin, skeleton, skull_archer, warrior_orc, gargula, death_champion, vecnas_eye, vecna_meets, vecna_sees_everything, dracolich
 from structures import stairway, statue, wall, dungeon, dungeon2, dungeon3, magic_circle, magic_circle_blink, altar, lost_garden
 
@@ -158,6 +169,7 @@ class Personagem:
             return False
 
         print("✨ Míssil Mágico lançado!")
+        print(spell)
 
         poder_magico = self.calcular_poder_magico_total()
         print(f"🔮 Poder mágico total: {poder_magico}")
@@ -271,7 +283,7 @@ class Personagem:
             else:
                 print("❌ Apenas magos podem usar o Orbe Mental de Vecna.")
         else:
-            print("❓ Item desconhecido.")
+            print("❓ Sem utilidade agora.")
 
     def gerenciar_equipamento(self, item_nome):
         if len(self.equipados) < 6:
@@ -558,18 +570,40 @@ class OlhoDeVecna(InimigoEspecial):
 
     def atacar(self, alvo):
         # Ignora invisibilidade completamente
+        limpar_tela()
         print(vecnas_eye)
         print(f"👁️ {self.nome} vê através de qualquer ilusão.")
         time.sleep(2)
         dano = max(0, random.randint(1, self.dano_lados) + self.ataque_bonus - alvo.ac)
         alvo.hp -= dano
         print(f"{self.nome} causa {dano} de dano a {alvo.nome}!")
-    
+
+
+def consumir_turno_jogador(jogador):
+    jogador.turno_magia()
+    jogador.atualizar_efeitos()
+
 
 def combate(jogador, inimigo, inimigo_iniciou=False):
 
     print(f"\n⚔️ Combate iniciado contra {inimigo.nome}!")
-    time.sleep(2)
+
+    # Exibe o inimigo inicial
+    if inimigo.nome == 'Goblin':
+        print(goblin)
+    elif inimigo.nome == 'Esqueleto Armadurado':
+        print(skeleton)
+    elif inimigo.nome == 'Arqueiro Sombrio':
+        print(skull_archer)
+    elif inimigo.nome == 'Gárgula de Pedra':
+        print(gargula)
+    elif inimigo.nome == 'Orc Guerreiro':
+        print(warrior_orc)
+    elif inimigo.nome == 'Campeão da Morte':
+        print(death_champion)
+    elif inimigo.nome == 'Dracolich':
+        print(dracolich)
+    time.sleep(1)
 
     def barra_vida(atual, maximo, tamanho=20):
         proporcao = max(atual, 0) / maximo
@@ -578,7 +612,43 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         return f"[{'█' * cheios}{'-' * vazios}] {max(0, atual)}/{maximo}"
 
     while jogador.esta_vivo() and inimigo.esta_vivo():
-        # Exibe o inimigo a cada turno
+
+        # =====================================================
+        # 🌀 PROCESSAR DoTs (início real do round)
+        # =====================================================
+        if hasattr(jogador, "processar_efeitos"):
+            jogador.processar_efeitos()
+            time.sleep(1)
+
+        if hasattr(inimigo, "processar_efeitos"):
+            inimigo.processar_efeitos()
+            time.sleep(1)
+
+        if not jogador.esta_vivo():
+            print(f"☠️ {jogador.nome} sucumbiu aos efeitos!")
+            return
+
+        if not inimigo.esta_vivo():
+            print(f"🔥 {inimigo.nome} foi derrotado pelos efeitos!")
+            return
+
+        # =====================================================
+        # ⚡ Inimigo inicia (emboscada)
+        # =====================================================
+        if inimigo_iniciou:
+            print(f"⚠️ {inimigo.nome} te ataca primeiro!")
+            inimigo.atacar(jogador)
+            inimigo_iniciou = False
+
+            if not jogador.esta_vivo():
+                print("☠️ Você foi derrotado antes de agir!")
+                return
+
+        # =====================================================
+        # ⏳ Turno do jogador (sem consumo automático)
+        # =====================================================
+        limpar_tela()
+
         if inimigo.nome == 'Goblin':
             print(goblin)
         elif inimigo.nome == 'Esqueleto Armadurado':
@@ -594,67 +664,38 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         elif inimigo.nome == 'Dracolich':
             print(dracolich)
 
-        # =====================================================
-        # 🌀 PROCESSAR EFEITOS ATIVOS (Jogador e Inimigo)
-        # =====================================================
-        if hasattr(jogador, "processar_efeitos"):
-            jogador.processar_efeitos()
-        if hasattr(inimigo, "processar_efeitos"):
-            inimigo.processar_efeitos()
-
-        # Se alguém morreu pelos efeitos, encerrar combate
-        if not jogador.esta_vivo():
-            print(f"☠️ {jogador.nome} sucumbiu aos efeitos!")
-            return
-        if not inimigo.esta_vivo():
-            print(f"🔥 {inimigo.nome} foi derrotado pelos efeitos!")
-            return
-
-        # =====================================================
-        # ⚡ Inimigo começa o turno
-        # =====================================================
-        if inimigo_iniciou:
-            print(f"⚠️ {inimigo.nome} te ataca primeiro!")
-            inimigo.atacar(jogador)
-            inimigo_iniciou = False
-            if not jogador.esta_vivo():
-                print("☠️ Você foi derrotado antes de agir!")
-                return
-
-        # =====================================================
-        # ⏳ Turno do jogador
-        # =====================================================
-        jogador.turno_magia()
-        jogador.atualizar_efeitos()
-
-        # =====================================================
-        # 📊 Mostrar status atualizado
-        # =====================================================
         print(f"\n❤️ {jogador.nome}:  {barra_vida(jogador.hp, jogador.hp_max)}")
         print(f"🛡️  {inimigo.nome}: {barra_vida(inimigo.hp, inimigo.hp_max)}")
         print(f"🎽 Equipamentos: {jogador.exibir_equipamentos()}")
 
-        # =====================================================
-        # 🎮 Escolher ação
-        # =====================================================
         print("\nAções disponíveis:")
         print("1 - Atacar")
         if jogador.classe == "Mago":
             print("2 - Usar Magia")
         print("3 - Usar Item")
         print("4 - Tentar Fugir")
-        acao = input("Escolha sua ação: ")
 
+        turno_valido = False
+        acao = input("Escolha sua ação: ").strip()
+
+        # =====================================================
+        # 🎮 Resolver ação
+        # =====================================================
         if acao == '1':
             jogador.atacar(inimigo)
+            turno_valido = True
 
         elif acao == '2' and jogador.classe == "Mago":
-            jogador.usar_magia(inimigo)
+            if jogador.usar_magia(inimigo):
+                turno_valido = True
 
         elif acao == '3':
             jogador.usar_pocao()
+            turno_valido = True
 
         elif acao == '4':
+            turno_valido = True
+
             if getattr(inimigo, 'bloqueia_fuga', False):
                 print("🧿 A Escadaria Ancestral foi selada! Fugir é impossível!")
                 time.sleep(2)
@@ -665,45 +706,53 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
             chance_base = 0.3
             if jogador.classe == "Ladino":
                 chance_base = 0.5
-            elif jogador.classe == "Mago":
-                chance_base = 0.3
             elif jogador.classe == "Guerreiro":
                 chance_base = 0.2
 
-            rolagem = random.random()
             print(f"🏃 Tentando fugir... (chance de {int(chance_base * 100)}%)")
             time.sleep(1)
 
-            if rolagem < chance_base:
+            if random.random() < chance_base:
                 print("✅ Você conseguiu fugir do combate!")
                 time.sleep(1)
 
-                # 33% de chance de ganhar um item
                 if random.random() < 0.33:
                     item = random.choice(['poção de cura', 'poção de força', 'poção de invisibilidade'])
                     jogador.inventario.append(item)
                     print(f"🎁 Ao fugir, você encontra um item caído: {item}!")
                     time.sleep(2)
 
-                # 33% de chance de perder um item
                 if jogador.inventario and random.random() < 0.33:
                     perdido = random.choice(jogador.inventario)
                     jogador.inventario.remove(perdido)
                     print(f"💨 Na pressa, você perde um item: {perdido}!")
-                return  # Fim do combate com sucesso
+
+                return
             else:
-                print("❌ Falha na fuga! Você perde seu turno.")
+                print("❌ Falha na fuga! Você perde o turno.")
+
         else:
-            print("❌ Ação inválida!")
-            continue
+            print("❌ Você hesita por um instante...")
+            time.sleep(1)
 
         # =====================================================
-        # ⚔️ Ataque do inimigo no fim do turno
+        # ⏳ Consumir turno APENAS se válido
+        # =====================================================
+        if turno_valido:
+            consumir_turno_jogador(jogador)
+        else:
+            print("⚠️ O inimigo não tem piedade.")
+
+        # =====================================================
+        # ⚔️ Resposta do inimigo
         # =====================================================
         time.sleep(1)
         if inimigo.esta_vivo():
             inimigo.atacar(jogador)
-            time.sleep(1)
+            time.sleep(2)
+        else:
+            print(f"{inimigo.nome} foi derrotado.")
+            time.sleep(2)
 
 
 # --------------------------- MAPA E GERADOR ----------------------------
@@ -739,11 +788,10 @@ class Mapa:
         )[0]
 
         if tipo_andar == "vazio":
-            print("🌫️ Um andar vazio e silencioso...")
+            print("🌫️ ..."), time.sleep(2)
             return
 
         elif tipo_andar == "armadilhas":
-            print("⚠️ Armadilhas cobrem o chão desta sala.")
             armadilhas_possiveis = ['espinhos', 'flechas', 'bomba mágica']
             for _ in range(random.randint(3, 6)):
                 x, y = random.randint(1, self.largura - 2), random.randint(1, self.altura - 2)
@@ -1143,14 +1191,19 @@ class DungeonGame:
                                 if self.jogador.classe == "Mago":
                                     self.jogador.cooldown_magia = 0
                                     self.jogador.ataque_bonus += 3
+                                    limpar_tela()
                                     print(magic_circle)
                                     time.sleep(1)
+                                    limpar_tela()
                                     print(magic_circle_blink)
                                     time.sleep(1)
+                                    limpar_tela()
                                     print(magic_circle)
                                     time.sleep(1)
+                                    limpar_tela()
                                     print(magic_circle_blink)
                                     time.sleep(1)
+                                    limpar_tela()
                                     print(magic_circle)
                                     print("✨ Suas energias arcanas são restauradas, e seu poder aumenta +3 INT (ataque mágico)!")
                                 else:
