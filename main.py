@@ -5,9 +5,9 @@
 
 NOTAS DE ATUALIZAÇÃO:
 
-- Bug de entrada inválida que permitia regeneração "gratuita" em sistema de combate foi removida.
+- Nerf de dano elemental e chance de dano crítico elemental
 
-    Agora o sistema pune entradas inválidas, interpretando como hesitação do jogador.
+- Agora há 40% de chance da escada final surgir em cada andar ≥ 43
 
 """
 
@@ -87,8 +87,8 @@ class Personagem:
         if self.arma:
             # Machado Anão Flamejante — Dano de fogo + DoT
             if self.arma['nome'] == 'Machado Flamejante':
-                porcentagem = random.randint(15, 30) / 100
-                crit_elemental = random.random() < 0.15  # 15% de crítico elemental
+                porcentagem = random.randint(10, 20) / 100
+                crit_elemental = random.random() < 0.05  # 5% de crítico elemental
                 dano_extra = int(dano * porcentagem * (2 if crit_elemental else 1))
                 alvo.hp -= dano_extra
                 print(f"🔥 Dano flamejante: +{dano_extra} ({int(porcentagem*100)}% do dano base){' [CRÍTICO ELEMENTAL!]' if crit_elemental else ''}!")
@@ -97,8 +97,8 @@ class Personagem:
 
             # Manoplas do Trovão — Dano elétrico + DoT
             elif self.arma['nome'] == 'Manoplas do Trovão':
-                porcentagem = random.randint(15, 30) / 100
-                crit_elemental = random.random() < 0.15  # 15% de crítico elemental
+                porcentagem = random.randint(7, 23) / 100
+                crit_elemental = random.random() < 0.05  # 5% de crítico elemental
                 dano_extra = int(dano * porcentagem * (2 if crit_elemental else 1))
                 alvo.hp -= dano_extra
                 print(f"⚡ Choque elétrico: +{dano_extra} ({int(porcentagem*100)}% do dano base){' [CRÍTICO ELEMENTAL!]' if crit_elemental else ''}!")
@@ -544,9 +544,9 @@ class OlhoDeVecna(InimigoEspecial):
         super().__init__(
             nome="Olho de Vecna",
             hp=250,
-            ac=45,
-            ataque_bonus=23,
-            dano_lados=25,
+            ac=55,
+            ataque_bonus=33,
+            dano_lados=35,
             pos=pos,
             tipo="lendário",
             magia=True
@@ -924,8 +924,8 @@ class Mapa:
                         self.portas[(x, y)] = random.random() < 0.5
 
         # Escadas
-        if dificuldade >= 33:
-            if random.random() < 0.3:  # 30% de chance da escada final surgir em cada andar ≥ 33
+        if dificuldade >= 43:
+            if random.random() < 0.4:  # 40% de chance da escada final surgir em cada andar ≥ 33
                 while True:
                     x, y = random.randint(1, self.largura - 2), random.randint(1, self.altura - 2)
                     if self.matriz[y][x] == '.':
