@@ -9,6 +9,7 @@ NOTAS DE ATUALIZAÇÃO:
 
 - Agora há 40% de chance da escada final surgir em cada andar ≥ 43
 
+- Atualização de rotas.py adicionando um ascii art para spell
 """
 
 import random
@@ -1242,4 +1243,5 @@ class DungeonGame:
 # ----------------------------- EXECUÇÃO ----------------------------------
 if __name__ == "__main__":
     DungeonGame().jogar()
+
 
