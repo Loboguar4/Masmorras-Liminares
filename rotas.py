@@ -1,4 +1,4 @@
-#    MASMORRAS LIMINARES ver. 0.9.0-beta ~~ Desenvolvido pelo Bandeirinha
+#    MASMORRAS LIMINARES ver. 0.9.1-beta ~~ Desenvolvido pelo Bandeirinha
 
 wizard = """
 ....:::.::....:!JYJJYJJJJJYYYJJJJJJY55555YY555555555YY?!!7?Y55YYYYYYYJJ???777!!~^^^^^^:.............
@@ -223,4 +223,5 @@ rogue2 = """
 ..                  ...            ....       ..  ......:::..      ...^^^^:..   .^^~~~^^^^^^::::::::
 ...                 ....            . .        ..  ......:~~!:       .^^^::.    :^^~~~~~^^^^^^^:::::
 ....  .             ....             ..        .:  . ..::::^:::      .::.::    .:^^^^~^^^^^^^^^^^^^:
+
 """
