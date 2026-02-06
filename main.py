@@ -52,8 +52,8 @@ class Personagem:
         self.dano_lados = dano_lados
         self.classe = classe
         self.inventario = ['poção de cura']
-        self.arma = None
-        self.armadura = None
+        self.arma = None     # não utilizado
+        self.armadura = None #não utilizado
         self.equipados = []  # até 6 itens
         self.cooldown_magia = 0
         self.bonus_temporario = 0
@@ -112,10 +112,8 @@ class Personagem:
                 chance = 0.2
             elif self.classe == "Guerreiro":
                 chance = 0.35
-            elif self.classe == "Ladino":
+            else self.classe == "Ladino":
                 chance = 0.5
-            else:
-                chance = 0.25
 
             if random.random() < chance:
                 if self.classe == 'Ladino':
@@ -140,7 +138,7 @@ class Personagem:
             self.bonus_temporario = 0
 
     # ==========================================================
-    # Funções de uso, efeitos e equipamentos 
+    # Funções de uso, efeitos e equipamentos
     # ==========================================================
     def processar_efeitos(self):
         """Processa DoTs e buffs ativos no início do turno do personagem."""
@@ -233,17 +231,17 @@ class Personagem:
             print(f"⚔️ Lâmina Sombria equipada (+{bonus} ataque/dano)!")
         elif item.startswith('Arco Élfico'):
             bonus = int(item.split('+')[1])
-            self.arma = {'nome': 'Arco Élfico', 'bonus': bonus, 'dano': bonus // 2}
+            self.arma = {'nome': 'Arco Élfico', 'bonus': bonus, 'dano': bonus // 3}
             self.gerenciar_equipamento(item)
-            print(f"🏹 Arco Élfico equipado (+{bonus // 2} ataque/dano)! Tem chance de disparo duplo dependendo da classe.")
+            print(f"🏹 Arco Élfico equipado (+{bonus // 3} ataque/dano)! Tem chance de disparo duplo dependendo da classe.")
         elif item.startswith('Armadura de Mithril'):
             self.gerenciar_equipamento(item)
             print(f"🛡️ Armadura de Mithril equipada! CA aumentada enquanto equipada.")
         elif item.startswith('Machado Anão Flamejante'):
             bonus = int(item.split('+')[1])
-            self.arma = {'nome': 'Machado Flamejante', 'bonus': bonus, 'dano': bonus + 2}
+            self.arma = {'nome': 'Machado Flamejante', 'bonus': bonus, 'dano': bonus + 2 // 2}
             self.gerenciar_equipamento(item)
-            print(f"🔥 Machado Flamejante equipado (+{bonus} ataque, +fogo)!")
+            print(f"🔥 Machado Flamejante equipado (+{bonus // 2} ataque, +fogo)!") # mais forte que manopla?
         elif item.startswith('Elmo da Fúria'):
             bonus = int(item.split('+')[1])
             self.bonus_temporario = bonus
@@ -388,7 +386,7 @@ class Personagem:
 
             # Itens ofensivos
             elif any(palavra in item for palavra in [
-                'Lâmina Sombria', 'Arco Élfico', 'Machado Anão Flamejante', 'Manoplas do Trovão', 'Elmo da Fúria', 
+                'Lâmina Sombria', 'Arco Élfico', 'Machado Anão Flamejante', 'Manoplas do Trovão', 'Elmo da Fúria',
                 'Cajado de Gelo', 'Orbe Mental de Vecna'
             ]):
                 ataque_bonus += bonus
@@ -456,7 +454,7 @@ class Personagem:
             print(f"👁️ O Orbe de Vecna amplifica seu poder mágico em +15%: {poder} ➜ {amplificado}")
             return amplificado
         return poder
-           
+
 
 class Inimigo:
     def __init__(self, nome, hp, ac, ataque_bonus, dano_lados, pos):
@@ -466,7 +464,7 @@ class Inimigo:
         self.ataque_bonus = ataque_bonus
         self.dano_lados = dano_lados
         self.pos = pos
-        self.efeitos_ativos = {}  
+        self.efeitos_ativos = {}
 
     def processar_efeitos(self):
         """Aplica DoTs no início do turno do inimigo."""
@@ -506,7 +504,7 @@ class Inimigo:
 
     def esta_vivo(self):
         return self.hp > 0
-    
+
 class InimigoEspecial(Inimigo):
     def __init__(self, nome, hp, ac, ataque_bonus, dano_lados, pos, tipo="comum", magia=False):
         super().__init__(nome, hp, ac, ataque_bonus, dano_lados, pos)
@@ -553,7 +551,7 @@ class OlhoDeVecna(InimigoEspecial):
             magia=True
         )
         self.bloqueia_fuga = True  # Garante que não se pode fugir do combate com ele
-        self.efeitos_ativos = {}  
+        self.efeitos_ativos = {}
 
     def processar_efeitos(self):
         """Aplica DoTs no início do turno do inimigo."""
@@ -589,7 +587,7 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
 
     print(f"\n⚔️ Combate iniciado contra {inimigo.nome}!")
 
-    # Exibe o inimigo inicial
+    # Exibe o inimigo inicial, mas as vezes em falso
     if inimigo.nome == 'Goblin':
         print(goblin)
     elif inimigo.nome == 'Esqueleto Armadurado':
@@ -604,7 +602,7 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         print(death_champion)
     elif inimigo.nome == 'Dracolich':
         print(dracolich)
-    time.sleep(1)
+    time.sleep(2)
 
     def barra_vida(atual, maximo, tamanho=20):
         proporcao = max(atual, 0) / maximo
@@ -619,11 +617,11 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         # =====================================================
         if hasattr(jogador, "processar_efeitos"):
             jogador.processar_efeitos()
-            time.sleep(1)
+            time.sleep(2)
 
         if hasattr(inimigo, "processar_efeitos"):
             inimigo.processar_efeitos()
-            time.sleep(1)
+            time.sleep(2)
 
         if not jogador.esta_vivo():
             print(f"☠️ {jogador.nome} sucumbiu aos efeitos!")
@@ -665,8 +663,8 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         elif inimigo.nome == 'Dracolich':
             print(dracolich)
 
-        print(f"\n❤️ {jogador.nome}:  {barra_vida(jogador.hp, jogador.hp_max)}")
         print(f"🛡️  {inimigo.nome}: {barra_vida(inimigo.hp, inimigo.hp_max)}")
+        print(f"\n❤️ {jogador.nome}:  {barra_vida(jogador.hp, jogador.hp_max)}")
         print(f"🎽 Equipamentos: {jogador.exibir_equipamentos()}")
 
         print("\nAções disponíveis:")
@@ -750,7 +748,7 @@ def combate(jogador, inimigo, inimigo_iniciou=False):
         time.sleep(1)
         if inimigo.esta_vivo():
             inimigo.atacar(jogador)
-            time.sleep(2)
+            time.sleep(1)
         else:
             print(f"{inimigo.nome} foi derrotado.")
             time.sleep(2)
@@ -838,7 +836,7 @@ class Mapa:
                 f'Manoplas do Trovão +{1 + dificuldade // 2}',
                 f'Orbe Mental de Vecna + {1 + dificuldade // 2}'
             ]
-            
+
             for _ in range(random.randint(6, 10)):
                 x, y = random.randint(1, self.largura - 2), random.randint(1, self.altura - 2)
                 if self.matriz[y][x] == '.' and (x, y) not in self.itens:
@@ -992,7 +990,7 @@ class Mapa:
                 novo_x, novo_y = ix, iy + dy
 
             # Verifica se pode mover e se não colide com o jogador
-            if (0 <= novo_x < self.largura and 0 <= novo_y < self.altura and 
+            if (0 <= novo_x < self.largura and 0 <= novo_y < self.altura and
                 self.matriz[novo_y][novo_x] == '.' and (novo_x, novo_y) != jogador_pos):
                 inimigo.pos = (novo_x, novo_y)
                 inimigos_que_agiram.add(id(inimigo))
@@ -1138,7 +1136,7 @@ class DungeonGame:
                     if (self.x, self.y) == self.mapa.escada_final:
                         time.sleep(2)
                         print("👁️ A escadaria ancestral treme com energia profana...")
-                        time.sleep(4) 
+                        time.sleep(4)
                         print(vecna_sees_everything), time.sleep(4)
                         print(vecna_meets), time.sleep(4)
                         print(vecnas_eye), time.sleep(2)
@@ -1155,7 +1153,7 @@ class DungeonGame:
                         exit()
 
                     elif (self.x, self.y) in self.mapa.escadas:
-                        if self.andar >= 33:
+                        if self.andar >= 43:
                             print("🔒 Uma escada antiga... mas parece ter sido destruída. Não leva a lugar algum.")
                             time.sleep(1)
                             return
@@ -1243,5 +1241,8 @@ class DungeonGame:
 # ----------------------------- EXECUÇÃO ----------------------------------
 if __name__ == "__main__":
     DungeonGame().jogar()
+
+
+
 
 
