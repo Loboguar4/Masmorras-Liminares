@@ -112,8 +112,10 @@ class Personagem:
                 chance = 0.2
             elif self.classe == "Guerreiro":
                 chance = 0.35
-            else self.classe == "Ladino":
+            elif self.classe == "Ladino":
                 chance = 0.5
+            else:
+                chance = 0.25
 
             if random.random() < chance:
                 if self.classe == 'Ladino':
